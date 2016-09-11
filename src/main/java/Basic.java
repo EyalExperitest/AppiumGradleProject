@@ -17,8 +17,16 @@ public class Basic {
 
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
         File classpathRoot = new File(System.getProperty("user.dir"));
+        System.out.println("classpathRoot ="+classpathRoot.getAbsolutePath());
+
         File appDir = new File(classpathRoot, "/Apps/");
+        System.out.println("appDir ="+appDir.getAbsolutePath());
+
         File app = new File(appDir, "com.experitest.ExperiBank.LoginActivity.2.apk");
+        System.out.println("app ="+app.getAbsolutePath());
+
+
+
         //File app = new File(appDir, ERIBANK_PROP[0]);
 
         // To create an object of Desired Capabilities
