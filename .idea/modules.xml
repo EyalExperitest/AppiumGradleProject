@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AppiumGradleProject.iml" filepath="$PROJECT_DIR$/.idea/modules/AppiumGradleProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AppiumGradleProject_main.iml" filepath="$PROJECT_DIR$/.idea/modules/AppiumGradleProject_main.iml" group="AppiumGradleProject" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AppiumGradleProject_test.iml" filepath="$PROJECT_DIR$/.idea/modules/AppiumGradleProject_test.iml" group="AppiumGradleProject" />
+    </modules>
+  </component>
+</project>
