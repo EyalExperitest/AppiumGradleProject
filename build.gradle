@@ -15,3 +15,7 @@ dependencies {
     compile 'io.appium:java-client:4.1.2'
     compile 'org.openqa.selenium:selenium-rc:1.0-20081010.060147'
 }
+task runBasic(type: JavaExec){
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'Basic'
+}
