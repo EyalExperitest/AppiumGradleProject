@@ -12,7 +12,7 @@ public class Basic {
 
     public static final String DEVICE_NAME = "GT-I9301I";
     public static final int ITERATIONS =2 ;
-    public static final String IP = "192.168.1.14";//"127.0.0.1";
+    public static final String IP = "127.0.0.1";//"192.168.1.14";
     private static AndroidDriver<WebElement> driver;
     final static String[] ERIBANK_PROP = {"com.experitest.ExperiBank.LoginActivity.2.apk", "com.experitest.ExperiBank",".LoginActivity"};
 
@@ -33,7 +33,9 @@ public class Basic {
         //File app = new File(appDir, ERIBANK_PROP[0]);
 
         // To create an object of Desired Capabilities
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
+
 
         // Name of mobile web browser to automate. It should be an empty string, as we are automation an app
         capabilities.setCapability("deviceName", DEVICE_NAME);
