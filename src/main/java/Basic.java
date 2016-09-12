@@ -12,6 +12,7 @@ public class Basic {
 
     public static final String DEVICE_NAME = "GT-I9301I";
     public static final int ITERATIONS =2 ;
+    public static final String IP = "192.168.1.14";//"127.0.0.1";
     private static AndroidDriver<WebElement> driver;
     final static String[] ERIBANK_PROP = {"com.experitest.ExperiBank.LoginActivity.2.apk", "com.experitest.ExperiBank",".LoginActivity"};
 
@@ -43,7 +44,7 @@ public class Basic {
         capabilities.setCapability("appActivity", ERIBANK_PROP[2]);
 
 
-        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = new AndroidDriver<>(new URL("http://"+ IP +":4723/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 
         //driver.findElementByXPath("//*[@id='usernameTextField']").sendKeys("company");
