@@ -10,7 +10,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class Basic {
 
-    public static final String DEVICE_NAME = "GT-I9301I";
+    public static final String DEVICE_NAME = "adb:asus Nexus 7";
     public static final int ITERATIONS =2 ;
     public static final String IP = "127.0.0.1";//"192.168.1.14";
     private static AndroidDriver<WebElement> driver;
@@ -18,7 +18,7 @@ public class Basic {
 
 
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
-        System.out.println("here");
+       /* System.out.println("here");
         File classpathRoot = new File(System.getProperty("user.dir"));
         System.out.println("classpathRoot ="+classpathRoot.getAbsolutePath());
 
@@ -26,7 +26,7 @@ public class Basic {
         System.out.println("appDir ="+appDir.getAbsolutePath());
 
         File app = new File(appDir, "com.experitest.ExperiBank.LoginActivity.2.apk");
-        System.out.println("app ="+app.getAbsolutePath());
+        System.out.println("app ="+app.getAbsolutePath());*/
 
 
 
