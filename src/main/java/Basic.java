@@ -37,11 +37,12 @@ public class Basic {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
 
-        // Name of mobile web browser to automate. It should be an empty string, as we are automation an app
+       // Name of mobile web browser to automate. It should be an empty string, as we are automation an app
         capabilities.setCapability("deviceName", DEVICE_NAME);
         //capabilities.setCapability("platformVersion", "4.4.2");
         //capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("app", app.getAbsolutePath());
+
+       // capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", ERIBANK_PROP[1]);
         capabilities.setCapability("appActivity", ERIBANK_PROP[2]);
 
