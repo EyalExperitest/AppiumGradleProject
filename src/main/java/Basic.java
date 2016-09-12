@@ -10,12 +10,14 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class Basic {
 
-    public static final String DEVICE_NAME = "adb:MI PAD";
+    public static final String DEVICE_NAME = "GT-I9301I";
+    public static final int ITERATIONS =2 ;
     private static AndroidDriver<WebElement> driver;
     final static String[] ERIBANK_PROP = {"com.experitest.ExperiBank.LoginActivity.2.apk", "com.experitest.ExperiBank",".LoginActivity"};
 
 
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
+        System.out.println("here");
         File classpathRoot = new File(System.getProperty("user.dir"));
         System.out.println("classpathRoot ="+classpathRoot.getAbsolutePath());
 
@@ -59,7 +61,7 @@ public class Basic {
         WebElement logoutButton = driver.findElementByXPath("//*[@text='Logout']");
         logoutButton.click();
 
-        for (int i=0;i<10;i++){
+        for (int i = 0; i< ITERATIONS; i++){
             userNameTextField.sendKeys("company");
             passwordTextField.sendKeys("company");
             loginButton.click();
