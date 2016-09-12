@@ -18,7 +18,7 @@ public class Basic {
 
 
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
-       /* System.out.println("here");
+       System.out.println("here");
         File classpathRoot = new File(System.getProperty("user.dir"));
         System.out.println("classpathRoot ="+classpathRoot.getAbsolutePath());
 
@@ -26,7 +26,8 @@ public class Basic {
         System.out.println("appDir ="+appDir.getAbsolutePath());
 
         File app = new File(appDir, "com.experitest.ExperiBank.LoginActivity.2.apk");
-        System.out.println("app ="+app.getAbsolutePath());*/
+        System.out.println("app ="+app.getAbsolutePath());
+        System.out.println("");
 
 
 
