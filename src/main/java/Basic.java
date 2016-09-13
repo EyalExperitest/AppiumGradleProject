@@ -18,7 +18,26 @@ public class Basic {
 
 
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
-       System.out.println("here");
+        //findAppPath();
+
+
+
+        //File app = new File(appDir, ERIBANK_PROP[0]);
+
+        // To create an object of Desired Capabilities
+
+        DesiredCapabilities capabilities = getDesiredCapabilitiesEriBank();
+        basicEriBankTest(capabilities,IP,4723);
+
+
+
+        Thread.sleep(10000);
+        //driver.quit();
+
+    }
+
+    public static void findAppPath() {
+        System.out.println("here");
         File classpathRoot = new File(System.getProperty("user.dir"));
         System.out.println("classpathRoot ="+classpathRoot.getAbsolutePath());
 
@@ -28,27 +47,10 @@ public class Basic {
         File app = new File(appDir, "com.experitest.ExperiBank.LoginActivity.2.apk");
         System.out.println("app ="+app.getAbsolutePath());
         System.out.println("");
+    }
 
-
-
-        //File app = new File(appDir, ERIBANK_PROP[0]);
-
-        // To create an object of Desired Capabilities
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-
-
-       // Name of mobile web browser to automate. It should be an empty string, as we are automation an app
-        capabilities.setCapability("deviceName", DEVICE_NAME);
-        //capabilities.setCapability("platformVersion", "4.4.2");
-        //capabilities.setCapability("platformName", "Android");
-
-       // capabilities.setCapability("app", app.getAbsolutePath());
-        capabilities.setCapability("appPackage", ERIBANK_PROP[1]);
-        capabilities.setCapability("appActivity", ERIBANK_PROP[2]);
-
-
-        driver = new AndroidDriver<>(new URL("http://"+ IP +":4723/wd/hub"), capabilities);
+    public static void basicEriBankTest(DesiredCapabilities capabilities,String ip, int port) throws MalformedURLException, InterruptedException {
+        driver = new AndroidDriver<>(new URL("http://"+ ip + ":" + port + "/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 
         //driver.findElementByXPath("//*[@id='usernameTextField']").sendKeys("company");
@@ -74,12 +76,23 @@ public class Basic {
             logoutButton.click();
 
         }
+    }
+
+    public static DesiredCapabilities getDesiredCapabilitiesEriBank() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
 
 
+        // Name of mobile web browser to automate. It should be an empty string, as we are automation an app
+        capabilities.setCapability("deviceName", DEVICE_NAME);
+        //capabilities.setCapability("platformVersion", "4.4.2");
+        //capabilities.setCapability("platformName", "Android");
+        //autoLaunch
+        capabilities.setCapability("autoLaunch", "true");
 
-        Thread.sleep(10000);
-        //driver.quit();
-
+        // capabilities.setCapability("app", app.getAbsolutePath());
+        capabilities.setCapability("appPackage", ERIBANK_PROP[1]);
+        capabilities.setCapability("appActivity", ERIBANK_PROP[2]);
+        return capabilities;
     }
 
 

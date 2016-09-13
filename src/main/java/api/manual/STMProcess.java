@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class STMProcess extends Process {
 
 	public static final String PROCESS_NAME = "SeeTestManual.exe";
+	public static final String MCLI_EXE = "mcli";
 	private static Process process;
 	static  private String seeTestAutoPath="C:\\Program Files (x86)\\Experitest\\SeeTestManual_Trunk";
 	static private String launchInSTAConfirmationLine ="(imagestudio.ImageStudioApp) INFO 	Load time";
@@ -91,7 +92,23 @@ public class STMProcess extends Process {
 
 
 	}
+	public int reserve(String id)throws IOException, InterruptedException{
 
+		String command = seeTestAutoPath + "\\" + MCLI_EXE + " reserve -id " + id + " -appium";
+		System.out.println("Command: "+command);
+		Process mCLI =Runtime.getRuntime().exec(command);
+		int waitFor = mCLI.waitFor();
+		System.out.println("Result: "+waitFor);
+		return waitFor;
+	}
+	public int reserve(String id,int duration)throws IOException, InterruptedException{
+		String command = seeTestAutoPath + "\\" + MCLI_EXE + " reserve -id " + id + " -d " + duration + " -appium";
+		System.out.println("Command: "+command);
+		Process mCLI =Runtime.getRuntime().exec(command);
+		int waitFor = mCLI.waitFor();
+		System.out.println("Result: "+waitFor);
+		return waitFor;
+	}
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
@@ -108,11 +125,7 @@ public class STMProcess extends Process {
 		Thread.sleep(10000);
 		memoryUsage = sTAProccess.getMemoryUsage();
 		System.out.println("Memory Usage :"+memoryUsage);
-
-
-
-		
-		
+		sTAProccess.reserve("dcd3b654");
 	}
 
 	/**
@@ -121,9 +134,9 @@ public class STMProcess extends Process {
 	 * @throws InterruptedException
 	 */
 	public static void closeSeeTest() throws IOException, InterruptedException {
-		Process shutdown =Runtime.getRuntime().exec("TASKKILL /F /IM " + PROCESS_NAME);
 		System.out.println("Killing SeeTestManual started");
-		shutdown.waitFor();
+		Process shutdown =Runtime.getRuntime().exec("TASKKILL /F /IM " + PROCESS_NAME);
+		System.out.println(shutdown.waitFor());
 		System.out.println("Killing SeeTestManual ended");
 
 	}
