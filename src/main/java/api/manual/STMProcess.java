@@ -7,7 +7,7 @@ public class STMProcess extends Process {
 	public static final String PROCESS_NAME = "SeeTestManual.exe";
 	public static final String MCLI_EXE = "mcli";
 	private static Process process;
-	static  private String seeTestAutoPath="C:\\Program Files (x86)\\Experitest\\SeeTestManual_Trunk";
+	static  private String seeTestAutoPath="C:/Program Files (x86)/Experitest/SeeTestManual_Trunk";
 	static private String launchInSTAConfirmationLine ="(imagestudio.ImageStudioApp) INFO 	Load time";
 
 	static private String seeTestAutoExecutable="SeeTestManual.exe";
@@ -24,8 +24,25 @@ public class STMProcess extends Process {
 		logReader=new LogReader(lastLog.getAbsolutePath(),launchInSTAConfirmationLine);
 		launchMonitorThread=new Thread (logReader);
 		launchMonitorThread.start();
+		File stmDir = new File (seeTestAutoPath);
+		File stmEXE = new File (seeTestAutoPath+"/"+seeTestAutoExecutable);
 
-		STMProcess.process =  Runtime.getRuntime().exec(seeTestAutoPath+"\\"+seeTestAutoExecutable);
+		System.out.println("Dir Exist ? "+stmDir.exists());
+		System.out.println("exe Exist ? "+stmEXE.exists());
+		System.out.println("Dir Path: ? "+stmDir.getAbsolutePath());
+		System.out.println("exe Path: ? "+stmEXE.getAbsolutePath());
+
+		ProcessBuilder pb = new ProcessBuilder()
+				.redirectErrorStream(true)
+				.directory(stmDir)
+				.command(
+						stmEXE.getAbsolutePath()
+				);
+
+//        this.process =  Runtime.getRuntime().exec(command);
+		System.out.println("Now Starting to Launch SeeTest Manual");
+		STMProcess.process = pb.start();
+		//STMProcess.process =  Runtime.getRuntime().exec(seeTestAutoPath+"\\"+seeTestAutoExecutable);
 		System.out.println("Launching SeeTestManual started");
 
 	}
