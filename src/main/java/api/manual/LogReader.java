@@ -1,5 +1,7 @@
 package api.manual;
 
+import org.apache.xpath.SourceTree;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -83,13 +85,16 @@ public class LogReader implements Runnable {
 		System.out.println("[Manual Launcher] Before Setting Buffer Reader");
 		BufferedReader stdout = new BufferedReader(new InputStreamReader(
 				powerShellProcess.getInputStream()));
-		System.out.println("[Manul Launcher] After Setting Buffer Reader");
-		while (true) {
+		System.out.println("[Manual Launcher] After Setting Buffer Reader");
+		System.out.println("[Manual Launcher] Powershell process is alive ? "+powerShellProcess.isAlive());
+		while (powerShellProcess.isAlive()) {
 			line = stdout.readLine();
 			if (line!=null){
-				System.out.println("[Manul Log]"+line);//*****************Debug Line!!! , will print all Log till waited Line
+				System.out.println("[Manual Log]"+line);//*****************Debug Line!!! , will print all Log till waited Line
 				if (line.contains(waitedLine)){
 					System.out.println(line);
+					System.out.println("[Manual Launcher] Waited Line is found");
+
 					break;
 				}
 			}
