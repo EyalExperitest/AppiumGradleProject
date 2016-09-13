@@ -49,9 +49,30 @@ public class LogReader implements Runnable {
 	 */
 	public static void waitForWordInFile(String fileName, String waitedLine) throws IOException {
 		String command = "powershell  Get-Content "+fileName+" -Wait ";
+
+
+
+
+
+
 		// Executing the command
 		System.out.println("[Manual Launcher] Before Command:"+command);
-		Process powerShellProcess = Runtime.getRuntime().exec(command);
+		ProcessBuilder pb = new ProcessBuilder()
+				.redirectErrorStream(true)
+		//		.directory(stmDir)
+				.command(
+						"powershell",
+						"Get-Content",
+						fileName,
+						"-Wait"
+				);
+
+//        this.process =  Runtime.getRuntime().exec(command);
+		System.out.println("Now Starting to Launch SeeTest Manual");
+
+		Process powerShellProcess = pb.start();
+
+		//Process powerShellProcess = Runtime.getRuntime().exec(command);
 		// Getting the results
 		System.out.println("[Manual Launcher] After Command:"+command);
 		System.out.println("[Manual Launcher] Before closing output stream");
@@ -66,7 +87,7 @@ public class LogReader implements Runnable {
 		while (true) {
 			line = stdout.readLine();
 			if (line!=null){
-				System.out.println(line);//*****************Debug Line!!! , will print all Log till waited Line
+				System.out.println("[Manul Log]"+line);//*****************Debug Line!!! , will print all Log till waited Line
 				if (line.contains(waitedLine)){
 					System.out.println(line);
 					break;
