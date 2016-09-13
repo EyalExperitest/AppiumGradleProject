@@ -59,7 +59,7 @@ public class LogReader implements Runnable {
 		while (true) {
 			line = stdout.readLine();
 			if (line!=null){
-				//System.out.println(line);
+				System.out.println(line);//*****************Debug Line!!! , will print all Log till waited Line
 				if (line.contains(waitedLine)){
 					System.out.println(line);
 					break;

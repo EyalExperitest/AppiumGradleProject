@@ -24,7 +24,7 @@ public class ProcessReader implements Runnable {
         String line;
         try(BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));) {
             while (process.isAlive()) {
-                System.out.println(stdout.readLine());
+                System.out.println("["+name+"] "+stdout.readLine());
             }
         }
         catch (Exception e){

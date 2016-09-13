@@ -1,4 +1,6 @@
 package api.manual;
+import utils.ProcessReader;
+
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
@@ -42,6 +44,9 @@ public class STMProcess extends Process {
 //        this.process =  Runtime.getRuntime().exec(command);
 		System.out.println("Now Starting to Launch SeeTest Manual");
 		STMProcess.process = pb.start();
+		ProcessReader processReader =new ProcessReader(process,"Manual");
+		Thread thread =new Thread(processReader);
+		thread.start();
 		//STMProcess.process =  Runtime.getRuntime().exec(seeTestAutoPath+"\\"+seeTestAutoExecutable);
 		System.out.println("Launching SeeTestManual started");
 
@@ -114,6 +119,9 @@ public class STMProcess extends Process {
 		String command = seeTestAutoPath + "\\" + MCLI_EXE + " reserve -id " + id + " -appium";
 		System.out.println("Command: "+command);
 		Process mCLI =Runtime.getRuntime().exec(command);
+		ProcessReader processReader =new ProcessReader(mCLI,"MCLI");
+		Thread thread =new Thread(processReader);
+		thread.start();
 		int waitFor = mCLI.waitFor();
 		System.out.println("Result: "+waitFor);
 		return waitFor;
