@@ -23,6 +23,32 @@ public class STRDProcess extends Process {
 	File stmDir = new File (seeTestRemoteDebugger);
 	File stmstrd = new File (seeTestRemoteDebugger +"/"+ seeTestRDExecutable);
 
+	public STRDProcess(boolean logReaderFlag, String udid, String ip, String port, String project, String userName, String password) throws IOException {
+		// TODO Auto-generated constructor stub
+
+
+
+
+		ProcessBuilder pb = new ProcessBuilder()
+				.redirectErrorStream(true)
+				.directory(stmDir)
+				.command(stmstrd.getAbsolutePath(),"connect" ,"-udid", udid, "-ip", ip,
+												   "-port", port, "-project", project,
+						 						   "-username", userName,"-password", password,"-v"
+
+				);
+
+//        this.process =  Runtime.getRuntime().exec(command);
+		System.out.println("Now Starting to Launch SeeTestRemoteDebugger");
+		STRDProcess.process = pb.start();
+		ProcessReader processReader =new ProcessReader(process,"Remote Debugger");
+		Thread thread =new Thread(processReader);
+		thread.start();
+		//STMProcess.process =  Runtime.getRuntime().exec(seeTestRemoteDebugger+"\\"+seeTestRDExecutable);
+		System.out.println("Launching SeeTestRemoteDebugger started");
+
+	}
+
 	public STRDProcess(boolean logReaderFlag, String udid, String ip, String port, String project) throws IOException {
 		// TODO Auto-generated constructor stub
 

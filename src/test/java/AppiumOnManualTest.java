@@ -20,6 +20,9 @@ public class AppiumOnManualTest {
     public static final int BOOT_STRAP_PORT = 4751;
     public static final String CLOUD_IP = "192.168.4.63";
     public static final String CLOUD_PORT = "8090";
+    public static final String PROJECT_NAME = "Default";
+    public static final String USER_NAME = "eyal";
+    public static final String PASSWORD = "Experitest2012";
     private STMProcess stmProcess;
     private STRDProcess strdProcess;
 
@@ -30,7 +33,7 @@ public class AppiumOnManualTest {
         /*
         stmProcess= new STMProcess(false);
         stmProcess.waitForLaunch();*/
-        strdProcess =new STRDProcess(true,ID, CLOUD_IP, CLOUD_PORT,"Default");
+        strdProcess =new STRDProcess(true,ID, CLOUD_IP, CLOUD_PORT, PROJECT_NAME, USER_NAME, PASSWORD);
         Thread.sleep(5000);
         //int reserve = stmProcess.reserve(ID);
         // System.out.println("Reserve Device with id :"+ID+" Result :"+ reserve);
