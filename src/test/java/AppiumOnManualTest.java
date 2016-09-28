@@ -4,37 +4,42 @@
 
 import api.appium.AppiumProcess;
 import api.manual.STMProcess;
+import api.remotedebug.STRDProcess;
 import org.junit.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.SocketOptions;
 
 /**
  *
  */
 public class AppiumOnManualTest {
-    public static final String IP = "127.0.0.1";//"192.168.1.14";
-    public static final String ID = "dcd3b654";
-    public static final int PORT = 4723;
+    public static final String APPIUM_IP = "127.0.0.1";//"192.168.1.14";
+    public static final String ID = "3230d293cf7611a3";
+    public static final int APPIUM_PORT = 4723;
     public static final int BOOT_STRAP_PORT = 4751;
+    public static final String CLOUD_IP = "192.168.4.63";
+    public static final String CLOUD_PORT = "8090";
     private STMProcess stmProcess;
+    private STRDProcess strdProcess;
+
     private AppiumProcess appiumProcess;
 
     @Before
     public void setUp() throws Exception {
-        stmProcess= new STMProcess();
-        stmProcess.waitForLaunch();
+        /*
+        stmProcess= new STMProcess(false);
+        stmProcess.waitForLaunch();*/
+        strdProcess =new STRDProcess(true,ID, CLOUD_IP, CLOUD_PORT,"Default");
         Thread.sleep(5000);
-        int reserve = stmProcess.reserve(ID);
-        System.out.println("Reserve Device with id :"+ID+" Result :"+ reserve);
-        if(reserve!=0){
+        //int reserve = stmProcess.reserve(ID);
+        // System.out.println("Reserve Device with id :"+ID+" Result :"+ reserve);
+/*        if(reserve!=0){
             throw new Exception("Failed to reserve device with id "+ID+" Returned value is "+reserve);
-        }
+        }*/
         System.out.println("Starting New Appium process");
 
-        appiumProcess = new AppiumProcess(PORT,BOOT_STRAP_PORT,ID);
+        appiumProcess = new AppiumProcess(APPIUM_PORT,BOOT_STRAP_PORT,ID);
 
     }
 
@@ -42,13 +47,14 @@ public class AppiumOnManualTest {
     public void testAppiumOnManual() throws MalformedURLException, InterruptedException {
         System.out.println("Starting Test Proper");
         DesiredCapabilities capabilities = Basic.getDesiredCapabilitiesEriBank();
-        Basic.basicEriBankTest(capabilities,IP,4723);
+        Basic.basicEriBankTest(capabilities, APPIUM_IP,APPIUM_PORT);
     }
 
     @After
     public void tearDown(){
         appiumProcess.destroy();
-        stmProcess.destroy();
+        strdProcess.destroy();
+//        stmProcess.destroy();
     }
 }
 

@@ -18,14 +18,18 @@ public class STMProcess extends Process {
 	static private File lastLog;
 	static private Thread launchMonitorThread=null;
 
-	public STMProcess() throws IOException {
+	public STMProcess(boolean logReaderFlag) throws IOException {
 		// TODO Auto-generated constructor stub
-		lastLog = LogHandeler.findLatestLogFile(logDirStr);
-		System.out.println("Last Log Found at: "+lastLog.getAbsolutePath());
-		LogHandeler.clearFile(lastLog);
-		logReader=new LogReader(lastLog.getAbsolutePath(),launchInSTAConfirmationLine);
-		launchMonitorThread=new Thread (logReader);
-		launchMonitorThread.start();
+		if (logReaderFlag) {
+
+
+			lastLog = LogHandeler.findLatestLogFile(logDirStr);
+			System.out.println("Last Log Found at: " + lastLog.getAbsolutePath());
+			LogHandeler.clearFile(lastLog);
+			logReader = new LogReader(lastLog.getAbsolutePath(), launchInSTAConfirmationLine);
+			launchMonitorThread = new Thread(logReader);
+			launchMonitorThread.start();
+		}
 		File stmDir = new File (seeTestAutoPath);
 		File stmEXE = new File (seeTestAutoPath+"/"+seeTestAutoExecutable);
 
@@ -59,8 +63,14 @@ public class STMProcess extends Process {
 
 	}
 	public void waitForLaunch() throws InterruptedException{
-		launchMonitorThread.join();
-		System.out.println("Launching SeeTest ended");
+		if (launchMonitorThread!=null) {
+			launchMonitorThread.join();
+			System.out.println("Launching SeeTestManual ended");
+		}
+		else{
+			Thread.sleep(20000);
+			System.out.println("Time for Launching SeeTestManual has ended");
+		}
 
 	}
 	
@@ -140,7 +150,7 @@ public class STMProcess extends Process {
 		
 		STMProcess.closeSeeTest();
 		
-		STMProcess sTAProccess= new STMProcess();
+		STMProcess sTAProccess= new STMProcess(true);
 		
 		int memoryUsage = sTAProccess.getMemoryUsage();
 		System.out.println("Memory Usage :"+memoryUsage);
