@@ -20,8 +20,8 @@ public class AppiumOnManualTest {
     public static final int BOOT_STRAP_PORT = 4751;
     public static final String CLOUD_IP = "192.168.1.210";
     public static final String CLOUD_PORT = "80";
-    public static final String PROJECT_NAME = "Default";
-    public static final String USER_NAME = "eyal";
+    public static final String PROJECT_NAME = "AppiumTest";
+    public static final String USER_NAME = "appiumuser";
     public static final String PASSWORD = "Experitest2012";
     private STMProcess stmProcess;
     private STRDProcess strdProcess;
@@ -57,6 +57,8 @@ public class AppiumOnManualTest {
     public void tearDown(){
         appiumProcess.destroy();
         strdProcess.destroy();
+        System.out.println("Done");
+
 //        stmProcess.destroy();
     }
 }
