@@ -42,7 +42,7 @@ public class AppiumOnManualTest {
         }*/
         System.out.println("Starting New Appium process");
 
-        appiumProcess = new AppiumProcess(APPIUM_PORT,BOOT_STRAP_PORT,ID);
+        appiumProcess = new AppiumProcess(APPIUM_PORT,BOOT_STRAP_PORT,ID,15000);
 
     }
 

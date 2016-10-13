@@ -19,8 +19,8 @@ public class AppiumProcess extends Process {
     public OutputStream getOutputStream() {
         return process.getOutputStream();
     }
-    public AppiumProcess(int port, int bootStrapPort, String id) throws IOException, InterruptedException {
-//        String command = "node " + APPIUM_JS + " --port " + port + " --bootstrap-port " + bootStrapPort + " --udid " + id;
+    public AppiumProcess(int port, int bootStrapPort, String id, int millis) throws IOException, InterruptedException {
+        String command = "node " + APPIUM_JS + " --port " + port + " --bootstrap-port " + bootStrapPort + " --udid " + id;
 //        System.out.println("Command : "+command);
 
         ProcessBuilder pb = new ProcessBuilder()
@@ -32,11 +32,12 @@ public class AppiumProcess extends Process {
 
 //        this.process =  Runtime.getRuntime().exec(command);
         process = pb.start();
-        System.out.println("Command : Launched");
+        System.out.println("Command "+command+": Launched");
         processReader =new ProcessReader(process,"Appium :"+port);
         Thread thread =new Thread(processReader);
         thread.start();
-        Thread.sleep(5000);
+        Thread.sleep(millis);
+        System.out.println("Waited for "+millis+" miliseconds");
     }
 
     @Override

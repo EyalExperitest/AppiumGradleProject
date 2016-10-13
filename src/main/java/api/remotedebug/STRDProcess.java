@@ -41,6 +41,14 @@ public class STRDProcess extends Process {
 //        this.process =  Runtime.getRuntime().exec(command);
 		System.out.println("Now Starting to Launch SeeTestRemoteDebugger");
 		STRDProcess.process = pb.start();
+        System.out.println("Command : "+stmstrd.getAbsolutePath()+" connect"+
+                                    " -udid "+udid+
+                                    " -ip "+ip+
+                                    " -port "+port+
+                                    " -project "+ project+
+                                    " -username "+ userName+
+                                    " -password "+ password+
+                                    " -v");
 		ProcessReader processReader =new ProcessReader(process,"Remote Debugger");
 		Thread thread =new Thread(processReader);
 		thread.start();
