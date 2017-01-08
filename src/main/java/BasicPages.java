@@ -1,17 +1,16 @@
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.PageFactory;
+import pages.LoginScreen;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-import io.appium.java_client.android.AndroidElement;
 
-import io.appium.java_client.MobileElement;
-import org.apache.xpath.operations.And;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import io.appium.java_client.android.AndroidDriver;
-
-public class Basic {
+public class BasicPages {
 
     public static final String DEVICE_NAME = "SM-T813";
     public static final int ITERATIONS =2 ;
@@ -55,6 +54,11 @@ public class Basic {
     public static void basicEriBankTest(DesiredCapabilities capabilities,String ip, int port) throws MalformedURLException, InterruptedException {
         driver = new AndroidDriver<>(new URL("http://"+ ip + ":" + port + "/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+        LoginScreen loginScreen = new LoginScreen();
+        PageFactory.initElements(new AppiumFieldDecorator(driver, 5, TimeUnit.SECONDS),loginScreen);
+
+
+
 
 
 
@@ -66,25 +70,27 @@ public class Basic {
 
 
 
-        AndroidElement userNameTextField = driver.findElementById("com.experitest.ExperiBank:id/usernameTextField");
+/*        AndroidElement userNameTextField = driver.findElementById("com.experitest.ExperiBank:id/usernameTextField");
 
         AndroidElement passwordTextField = driver.findElementById("com.experitest.ExperiBank:id/passwordTextField");
 
-        AndroidElement loginButton = driver.findElementByXPath("//*[@text='Login']");
+        AndroidElement loginButton = driver.findElementByXPath("/*//*[@text='Login']");*/
 
-        userNameTextField.sendKeys("company");
 
-        passwordTextField.sendKeys("company");
 
-        loginButton.click();
+        loginScreen.usernameTextField.sendKeys("company");
+
+        loginScreen.passwordTextField.sendKeys("company");
+
+        loginScreen.login.click();
         Thread.sleep(2000);
         AndroidElement logoutButton = driver.findElementByXPath("//*[@text='Logout']");
         logoutButton.click();
 
         for (int i = 0; i< ITERATIONS; i++){
-            userNameTextField.sendKeys("company");
-            passwordTextField.sendKeys("company");
-            loginButton.click();
+            loginScreen.usernameTextField.sendKeys("company");
+            loginScreen.passwordTextField.sendKeys("company");
+            loginScreen.login.click();
             Thread.sleep(2000);
             logoutButton.click();
 
