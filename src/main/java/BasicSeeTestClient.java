@@ -1,22 +1,23 @@
+import com.experitest.appium.SeeTestAndroidDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-import io.appium.java_client.android.AndroidElement;
 
-import io.appium.java_client.MobileElement;
-import org.apache.xpath.operations.And;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
+public class BasicSeeTestClient {
 
-import io.appium.java_client.android.AndroidDriver;
-
-public class Basic {
-
-    public static final String DEVICE_NAME = "SM-T813";
+    public static final String DEVICE_NAME = "adb:samsung SM-G920F";
     public static final int ITERATIONS =2 ;
     public static final String IP = "127.0.0.1";//"192.168.1.14";
-    private static AndroidDriver<AndroidElement> driver;
+    private static final String UDID ="041604eb94801702";
+    //private static AndroidDriver<AndroidElement> driver;
+    private static  SeeTestAndroidDriver<AndroidElement> driver;
+
     final static String[] ERIBANK_PROP = {"com.experitest.ExperiBank.LoginActivity.2.apk", "com.experitest.ExperiBank",".LoginActivity"};
 
 
@@ -53,7 +54,8 @@ public class Basic {
     }
 
     public static void basicEriBankTest(DesiredCapabilities capabilities,String ip, int port) throws MalformedURLException, InterruptedException {
-        driver = new AndroidDriver<>(new URL("http://"+ ip + ":" + port + "/wd/hub"), capabilities);
+        //driver = new AndroidDriver<>(new URL("http://"+ ip + ":" + port + "/wd/hub"), capabilities);
+        driver = new SeeTestAndroidDriver<>(new URL("http://localhost:8889"), capabilities);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 
 
@@ -80,7 +82,9 @@ public class Basic {
         Thread.sleep(2000);
         AndroidElement logoutButton = driver.findElementByXPath("//*[@text='Logout']");
         logoutButton.click();
-
+        System.out.println("Waiting For Element That is not there");
+        driver.findElementByXPath("//*[@text='NOP NOP']");
+/*
         for (int i = 0; i< ITERATIONS; i++){
             userNameTextField.sendKeys("company");
             passwordTextField.sendKeys("company");
@@ -88,7 +92,7 @@ public class Basic {
             Thread.sleep(2000);
             logoutButton.click();
 
-        }
+        }*/
     }
 
     public static DesiredCapabilities getDesiredCapabilitiesEriBank() {
@@ -97,6 +101,8 @@ public class Basic {
 
         // Name of mobile web browser to automate. It should be an empty string, as we are automation an app
         capabilities.setCapability("deviceName", DEVICE_NAME);
+        capabilities.setCapability("udid", UDID);
+
         //capabilities.setCapability("platformVersion", "4.4.2");
         //capabilities.setCapability("platformName", "Android");
         //autoLaunch
